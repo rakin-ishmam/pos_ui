@@ -3,6 +3,7 @@
 
 // Require index.html so it gets copied to dist
 require('./index.html');
+// require("bootstrap/dist/css/bootstrap.min.css");
 
 var Elm = require('./Main.elm');
 var mountNode = document.getElementById('main');
