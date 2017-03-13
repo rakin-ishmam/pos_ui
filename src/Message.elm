@@ -1,13 +1,10 @@
 module Message exposing (..)
 
-import Tab.Message as TabMessage
-import Drawer.Message as DrawerMessage
+import Menu.Message as MenuMessage
 import Material
 
 
 type Msg
-    = Tab TabMessage.Msg
-    | Drawer DrawerMessage.Msg
-    | SelectTab Int
+    = Menu MenuMessage.Msg
     | Mdl (Material.Msg Msg)
     | NoOp

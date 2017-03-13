@@ -1,22 +1,19 @@
 module Model exposing (..)
 
 import Message exposing (Msg)
-import Tab.Model as TabModel
-import Drawer.Model as DrawerModel
+import Menu.Model as MenuModel
 import Material
 
 
 type alias Model =
-    { tab : TabModel.Model
-    , drawer : DrawerModel.Model
+    { menu : MenuModel.Model
     , mdl : Material.Model
     }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( { tab = TabModel.init
-      , drawer = DrawerModel.init
+    ( { menu = MenuModel.init
       , mdl = Material.model
       }
     , Cmd.none
