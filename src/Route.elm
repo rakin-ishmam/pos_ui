@@ -14,14 +14,15 @@ delta2url pre cur =
 
 delta2builder : Model -> Model -> Maybe Builder  
 delta2builder pre cur =
-    Just builder
+    Just
+        <| Builder.replacePath [cur.menu.current]
+        <| Builder.builder
+
+url2messages : Location -> List Msg
+url2messages location =
+    builder2messages (Builder.fromHash location.href)
 
 
-url2actions : Location -> List Msg
-url2actions location =
-    builder2actions (Builder.fromHash location.href)
-
-
-builder2actions : Builder -> List Msg
-builder2actions builder =
+builder2messages : Builder -> List Msg
+builder2messages builder =
     []

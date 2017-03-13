@@ -12,7 +12,7 @@ main : RouteUrlProgram Never Model.Model Msg
 main =
     RouteUrl.program
         { delta2url = Route.delta2url
-        , location2messages = Route.url2actions
+        , location2messages = Route.url2messages
         , init = Model.init
         , update = Update.update
         , view = View.view
