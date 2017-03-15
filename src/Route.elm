@@ -49,25 +49,25 @@ builder2messages builder =
                 "Sell" ->
                     [ Message.Menu <|
                         MenuMessage.SelectTab <|
-                            tabInd "Sell"
+                            tabInd MenuData.sell
                     ]
 
                 "Product" ->
                     [ Message.Menu <|
                         MenuMessage.SelectTab <|
-                            tabInd "Product"
+                            tabInd MenuData.product
                     ]
 
                 "Order" ->
                     [ Message.Menu <|
                         MenuMessage.SelectTab <|
-                            tabInd "Order"
+                            tabInd MenuData.order
                     ]
 
                 "Report" ->
                     [ Message.Menu <|
                         MenuMessage.SelectTab <|
-                            tabInd "Report"
+                            tabInd MenuData.report
                     ]
 
                 _ ->

@@ -3,6 +3,7 @@ module Update exposing (..)
 import Message
 import Model exposing (Model)
 import Menu.Update as MenuUpdate
+import User.Update as UserUpdate
 import Material
 
 
@@ -18,6 +19,13 @@ update msg model =
                     MenuUpdate.update menuMsg model.menu
             in
                 ( { model | menu = md }, Cmd.map Message.Menu ms )
+
+        Message.User userMsg ->
+            let
+                ( md, ms ) =
+                    UserUpdate.update userMsg model.user
+            in
+                ( { model | user = md }, Cmd.map Message.User ms )
 
         _ ->
             ( model, Cmd.none )

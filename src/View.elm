@@ -12,29 +12,31 @@ import Material.Progress as Loading
 import Material.Layout as Layout
 import Menu.Message as MenuMessage
 import Menu.View as MenuView
+import User.View as UserView
 import Menu.Model as MenuModel
 import List
 
 
-
 view : Model -> Html Msg
 view model =
-    Scheme.topWithScheme Color.Teal Color.Red (myView model)
+    Scheme.topWithScheme Color.Teal Color.Red (appView model)
 
 
-myView model =
+appView model =
     Layout.render Message.Mdl
         model.mdl
         [ Layout.fixedHeader
         , Layout.fixedTabs
-        , Layout.selectedTab 
-            <| MenuModel.tabInd model.menu
+        , Layout.selectedTab <|
+            MenuModel.tabInd model.menu
         , Layout.onSelectTab selectTab
         ]
         { header = [ Layout.row [] [ Layout.title [] [ text "POS" ] ] ]
         , drawer = List.map test (MenuView.drawerView model.menu)
         , tabs = ( List.map test (MenuView.tabView model.menu), [ Color.background (Color.color Color.Teal Color.S400) ] )
-        , main = []
+        , main =
+            [ Html.map Message.User (UserView.view model.user)
+            ]
         }
 
 
@@ -42,7 +44,6 @@ selectTab : Int -> Msg
 selectTab ind =
     Message.Menu <|
         MenuMessage.SelectTab ind
-
 
 test a =
     Html.map Message.Menu a
