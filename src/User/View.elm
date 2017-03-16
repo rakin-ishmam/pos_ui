@@ -20,7 +20,11 @@ view model =
     else
         div [] []
 
+
+
 -- style={{width: 200, float: 'left'}}
+
+
 tabView : Model -> Html Msg
 tabView model =
     Tabs.render Message.Mdl
@@ -29,17 +33,13 @@ tabView model =
         [ Tabs.ripple
         , Tabs.onSelectTab selectTab
         , Tabs.activeTab (activeTab model)
-        , Options.css "float" "left"
-        , Options.css "width" "200"
         ]
         [ Tabs.label
-            [ Options.center ]
-            [ text Model.listView
-            ]
+            [ Options.center, Options.css "width" "50%" ]
+            [ text Model.listView ]
         , Tabs.label
-            [ Options.center ]
-            [ text Model.createView
-            ]
+            [ Options.center, Options.css "width" "50%" ]
+            [ text Model.createView ]
         ]
         []
 
