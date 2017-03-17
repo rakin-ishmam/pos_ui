@@ -1,33 +1,30 @@
 module User.View exposing (..)
 
-import User.Message as Message exposing (Msg)
+import User.Msg as Msg exposing (Msg)
 import User.Model as Model exposing (Model)
 import Html exposing (Html, h5, div, p, text, table, tr, td, map)
 import Material.Tabs as Tabs
 import Material.Options as Options
+import User.Data as UserData
 
 
 view : Model -> Html Msg
 view model =
-    if model.view == Model.createView then
+    if model.view == UserData.create then
         tabView model
-    else if model.view == Model.listView then
+    else if model.view == UserData.list then
         tabView model
-    else if model.view == Model.detailView then
+    else if model.view == UserData.detail then
         detailView model
-    else if model.view == Model.editView then
-        tabView model
+    else if model.view == UserData.edit then
+        editView model
     else
         div [] []
 
 
-
--- style={{width: 200, float: 'left'}}
-
-
 tabView : Model -> Html Msg
 tabView model =
-    Tabs.render Message.Mdl
+    Tabs.render Msg.Mdl
         [ 0 ]
         model.mdl
         [ Tabs.ripple
@@ -36,35 +33,39 @@ tabView model =
         ]
         [ Tabs.label
             [ Options.center, Options.css "width" "50%" ]
-            [ text Model.listView ]
+            [ text UserData.list ]
         , Tabs.label
             [ Options.center, Options.css "width" "50%" ]
-            [ text Model.createView ]
+            [ text UserData.create ]
         ]
         []
 
 
 activeTab : Model -> Int
 activeTab model =
-    if model.view == Model.createView || model.view == Model.editView then
-        1
-    else
-        0
+    Model.tabInd model
 
 
 selectTab : Int -> Msg
 selectTab ind =
-    case ind of
-        0 ->
-            Message.Lst
-
-        1 ->
-            Message.Create
+    case UserData.tabVal ind of
+        Just val ->
+            if val == UserData.list then
+                Msg.Lst
+            else if val == UserData.create then
+                Msg.Create
+            else
+                Msg.None
 
         _ ->
-            Message.None
+            Msg.None
 
 
 detailView : Model -> Html Msg
 detailView model =
     div [] [ text "detail view" ]
+
+
+editView : Model -> Html Msg
+editView model =
+    div [] [ text "edit view" ]

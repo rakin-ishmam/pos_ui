@@ -1,4 +1,4 @@
-module User.Message exposing (..)
+module User.Msg exposing (..)
 
 import Material
 

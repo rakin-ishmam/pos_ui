@@ -1,31 +1,31 @@
 module Update exposing (..)
 
-import Message
+import Msg exposing(Msg)
 import Model exposing (Model)
 import Menu.Update as MenuUpdate
 import User.Update as UserUpdate
 import Material
 
 
-update : Message.Msg -> Model -> ( Model, Cmd Message.Msg )
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Message.Mdl msg_ ->
-            Material.update Message.Mdl msg_ model
+        Msg.Mdl msg_ ->
+            Material.update Msg.Mdl msg_ model
 
-        Message.Menu menuMsg ->
+        Msg.Menu menuMsg ->
             let
                 ( md, ms ) =
                     MenuUpdate.update menuMsg model.menu
             in
-                ( { model | menu = md }, Cmd.map Message.Menu ms )
+                ( { model | menu = md }, Cmd.map Msg.Menu ms )
 
-        Message.User userMsg ->
+        Msg.User userMsg ->
             let
                 ( md, ms ) =
                     UserUpdate.update userMsg model.user
             in
-                ( { model | user = md }, Cmd.map Message.User ms )
+                ( { model | user = md }, Cmd.map Msg.User ms )
 
         _ ->
             ( model, Cmd.none )

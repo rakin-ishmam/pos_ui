@@ -1,6 +1,6 @@
 module Model exposing (..)
 
-import Message exposing (Msg)
+import Msg exposing (Msg)
 import Menu.Model as MenuModel
 import Material
 import User.Model as UserModel

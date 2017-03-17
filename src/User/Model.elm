@@ -1,6 +1,7 @@
 module User.Model exposing (..)
 
 import Material
+import User.Data as UserData
 
 
 type alias Model =
@@ -11,26 +12,15 @@ type alias Model =
 
 init : Model
 init =
-    { view = listView
+    { view = UserData.list
     , mdl = Material.model
     }
 
 
-createView : String
-createView =
-    "Create"
-
-
-listView : String
-listView =
-    "List"
-
-
-detailView : String
-detailView =
-    "Detail"
-
-
-editView : String
-editView =
-    "Edit"
+tabInd : Model -> Int
+tabInd model =
+    case UserData.tabInd model.view of
+        Just ind ->
+            ind
+        _ -> 
+            -1

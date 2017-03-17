@@ -1,27 +1,28 @@
 module User.Update exposing (..)
 
 import User.Model as Model exposing (Model)
-import User.Message as Message exposing (Msg)
+import User.Msg as Msg exposing (Msg)
+import User.Data as UserData
 import Material
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Message.Mdl msg_ ->
-            Material.update Message.Mdl msg_ model
+        Msg.Mdl msg_ ->
+            Material.update Msg.Mdl msg_ model
 
-        Message.Create ->
-            ( { model | view = Model.createView }, Cmd.none )
+        Msg.Create ->
+            ( { model | view = UserData.create }, Cmd.none )
 
-        Message.Lst ->
-            ( { model | view = Model.listView }, Cmd.none )
+        Msg.Lst ->
+            ( { model | view = UserData.list }, Cmd.none )
 
-        Message.Detail id ->
-            ( { model | view = Model.detailView }, Cmd.none )
+        Msg.Detail id ->
+            ( { model | view = UserData.detail }, Cmd.none )
 
-        Message.Edit id ->
-            ( { model | view = Model.editView }, Cmd.none )
+        Msg.Edit id ->
+            ( { model | view = UserData.edit }, Cmd.none )
 
         _ ->
             ( model, Cmd.none )

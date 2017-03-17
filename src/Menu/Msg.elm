@@ -1,4 +1,4 @@
-module Menu.Message exposing (..)
+module Menu.Msg exposing (..)
 import Material
 
 type Msg
