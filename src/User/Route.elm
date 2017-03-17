@@ -21,6 +21,10 @@ builder2messages builder =
                 [ Msg.Create ]
             else if first == Data.list then
                 [ Msg.Lst ]
+            else if first == Data.detail then
+                [ Msg.Detail "test" ]
+            else if first == Data.edit then
+                [ Msg.Edit "test" ]
             else
                 []
 

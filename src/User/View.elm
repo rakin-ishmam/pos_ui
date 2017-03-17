@@ -4,8 +4,11 @@ import User.Msg as Msg exposing (Msg)
 import User.Model as Model exposing (Model)
 import Html exposing (Html, h5, div, p, text, table, tr, td, map)
 import Material.Tabs as Tabs
+import Material.Typography as Typo
 import Material.Options as Options
 import User.Data as UserData
+import Material.Grid as Grid
+import Material.Chip as Chip
 
 
 view : Model -> Html Msg
@@ -63,9 +66,29 @@ selectTab ind =
 
 detailView : Model -> Html Msg
 detailView model =
-    div [] [ text "detail view" ]
+    Grid.grid []
+        [ Grid.cell [ Grid.size Grid.All 3 ]
+            [ Options.styled p [ Typo.title ] [ text "Detail" ] ]
+        , Grid.cell [ Grid.offset Grid.All 8, Grid.size Grid.All 1 ]
+            [ Chip.span
+                [ Chip.deleteIcon "cancel" ]
+                [ Chip.content []
+                    [ text "Cancel" ]
+                ]
+            ]
+        ]
 
 
 editView : Model -> Html Msg
 editView model =
-    div [] [ text "edit view" ]
+    Grid.grid []
+        [ Grid.cell [ Grid.size Grid.All 3 ]
+            [ Options.styled p [ Typo.title ] [ text "Edit" ] ]
+        , Grid.cell [ Grid.offset Grid.All 8, Grid.size Grid.All 1 ]
+            [ Chip.span
+                [ Chip.deleteIcon "cancel" ]
+                [ Chip.content []
+                    [ text "Cancel" ]
+                ]
+            ]
+        ]
