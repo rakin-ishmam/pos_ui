@@ -4,6 +4,7 @@ import Msg exposing(Msg)
 import Model exposing (Model)
 import Menu.Update as MenuUpdate
 import User.Update as UserUpdate
+import Login.Update as LoginUpdate
 import Material
 
 
@@ -26,6 +27,13 @@ update msg model =
                     UserUpdate.update userMsg model.user
             in
                 ( { model | user = md }, Cmd.map Msg.User ms )
+
+        Msg.Login loginMsg ->
+            let
+                ( md, ms ) =
+                    LoginUpdate.update loginMsg model.login
+            in
+                ( { model | login = md }, Cmd.map Msg.Login ms )
 
         _ ->
             ( model, Cmd.none )

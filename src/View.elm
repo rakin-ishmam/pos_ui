@@ -15,12 +15,33 @@ import Menu.View as MenuView
 import User.View as UserView
 import Menu.Model as MenuModel
 import Menu.Data as MenuData
+import Login.View as LoginView
 import List
 
 
 view : Model -> Html Msg
 view model =
-    Scheme.topWithScheme Color.Teal Color.Red (appView model)
+    -- Scheme.topWithScheme Color.Teal Color.Red (appView model)
+    Scheme.topWithScheme Color.Teal Color.Red
+     <| loginView 
+     <| model
+
+
+loginView : Model -> Html Msg
+loginView model =
+    Layout.render Msg.Mdl
+        model.mdl
+        [ Layout.fixedHeader
+        , Layout.fixedTabs
+        ]
+        { header = [ Layout.row [] [ Layout.title [] [ text "Karkhana" ] ] ]
+        , drawer = []
+        , tabs = ( [], [] )
+        , main =
+            [ Html.map Msg.Login <|
+                LoginView.view model.login
+            ]
+        }
 
 
 appView model =
