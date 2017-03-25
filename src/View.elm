@@ -14,7 +14,7 @@ import Menu.Msg as MenuMsg
 import Menu.View as MenuView
 import User.View as UserView
 import Menu.Model as MenuModel
-import Menu.Data as MenuData
+import Menu.Label as MenuLabel
 import Login.View as LoginView
 import List
 
@@ -22,9 +22,9 @@ import List
 view : Model -> Html Msg
 view model =
     -- Scheme.topWithScheme Color.Teal Color.Red (appView model)
-    Scheme.topWithScheme Color.Teal Color.Red
-     <| loginView 
-     <| model
+    Scheme.topWithScheme Color.Teal Color.Red <|
+        loginView <|
+            model
 
 
 loginView : Model -> Html Msg
@@ -76,7 +76,7 @@ pickView model =
         cur =
             model.menu.current
     in
-        if cur == MenuData.user then
+        if cur == MenuLabel.user then
             Html.map Msg.User (UserView.view model.user)
         else
             div [] []

@@ -1,31 +1,36 @@
-module Login.Model exposing (Model, init)
+module Login.Model exposing (Model, model, Token, Login)
 
 import Material
+import RemoteData exposing (WebData)
 
 
-type alias ProxyMdl =
-    { mdl : Material.Model
-    }
-
-
-proxyInit : ProxyMdl
-proxyInit =
-    { mdl = Material.model
-    }
-
-
-type alias Model =
+type alias Login =
     { username : String
-    , mdlUsername : ProxyMdl
-    , mdlPassword : ProxyMdl
     , password : String
     }
 
 
-init : Model
-init =
+login : Login
+login =
     { username = ""
     , password = ""
-    , mdlUsername = proxyInit
-    , mdlPassword = proxyInit
+    }
+
+
+type alias Token =
+    { token : String }
+
+
+type alias Model =
+    { login : Login
+    , mdl : Material.Model
+    , token : WebData Token
+    }
+
+
+model : Model
+model =
+    { login = login
+    , mdl = Material.model
+    , token = RemoteData.NotAsked
     }

@@ -7,6 +7,8 @@ import Material.Options as Options
 import Material.Elevation as Elevation
 import Material.Textfield as Textfield
 import Material.Typography as Typo
+import Material.Button as Button
+import RemoteData
 
 
 view : Model -> Html Msg
@@ -24,23 +26,41 @@ view model =
             [ Options.styled p
                 [ Typo.display2 ]
                 [ text "Login" ]
-            , Textfield.render Msg.MdlUsername
-                [ 2 ]
-                model.mdlUsername.mdl
+            , Textfield.render Msg.Mdl
+                [ 0 ]
+                model.mdl
                 [ Textfield.label "Username"
                 , Textfield.floatingLabel
                 , Textfield.text_
+                , Options.onInput Msg.Username
                 , Options.css "width" "100%"
                 ]
                 []
-            , Textfield.render Msg.MdlPassword
-                [ 2 ]
-                model.mdlPassword.mdl
+            , Textfield.render Msg.Mdl
+                [ 1 ]
+                model.mdl
                 [ Textfield.label "Password"
                 , Textfield.floatingLabel
                 , Options.css "width" "100%"
+                , Options.onInput Msg.Password
                 , Textfield.text_
                 ]
                 []
+            , Button.render Msg.Mdl
+                [ 2 ]
+                model.mdl
+                [ Button.raised
+                , Button.colored
+                , Button.ripple
+                , Options.onClick Msg.Login
+                ]
+                [ text "Login" ]
+            , div []
+                [ case model.token of
+                    RemoteData.Success token ->
+                        text token.token
+                    _ ->
+                        text "test"
+                ]
             ]
         ]

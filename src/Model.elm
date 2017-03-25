@@ -15,11 +15,11 @@ type alias Model =
     }
 
 
-init : ( Model, Cmd Msg )
-init =
+model : ( Model, Cmd Msg )
+model =
     ( { menu = MenuModel.init
       , user = UserModel.init
-      , login = LoginModel.init
+      , login = LoginModel.model
       , mdl = Material.model
       }
     , Cmd.none

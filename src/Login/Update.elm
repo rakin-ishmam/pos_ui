@@ -3,21 +3,35 @@ module Login.Update exposing (..)
 import Login.Msg as Msg exposing (Msg)
 import Login.Model as Model exposing (Model)
 import Material
+import Debug
+import Login.Commands as Commands
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case msg of 
-        Msg.MdlUsername msg_ ->
-            let
-                (md, cmd) = Material.update Msg.MdlUsername msg_ model.mdlUsername
-            in
-                ( { model | mdlUsername = { mdl = md.mdl } }, cmd )
+    case msg of
+        Msg.Mdl msg_ ->
+            Material.update Msg.Mdl msg_ model |> Just
 
-        Msg.MdlPassword msg_ ->
+        Msg.Username val ->
             let
-                (md, cmd) = Material.update Msg.MdlPassword msg_ model.mdlPassword
+                login =
+                    model.login
             in
-                ( { model | mdlPassword = { mdl = md.mdl } }, cmd )
+                ( { model | login = { login | username = val } }, Cmd.none )
 
-        _ -> 
+        Msg.Password val ->
+            let
+                login =
+                    model.login
+            in
+                ( { model | login = { login | password = val } }, Cmd.none )
+
+        Msg.Login ->
+            ( model, Commands.login model.login )
+
+        Msg.OnToken val ->
+            ( { model | token = val }, Cmd.none )
+
+        _ ->
             ( model, Cmd.none )

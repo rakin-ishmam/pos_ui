@@ -2,7 +2,7 @@ module Menu.Update exposing (..)
 
 import Menu.Msg as Msg exposing(Msg)
 import Menu.Model as Model exposing(Model)
-import Menu.Data as Data
+import Menu.Label as Label
 import Material
 
 
@@ -13,16 +13,16 @@ update msg model =
             ( { model | current = Model.tabVal ind }, Cmd.none )
 
         Msg.Role ->
-            ( { model | current = Data.role }, Cmd.none )
+            ( { model | current = Label.role }, Cmd.none )
 
         Msg.Me ->
-            ( { model | current = Data.me }, Cmd.none )
+            ( { model | current = Label.me }, Cmd.none )
 
         Msg.User ->
-            ( { model | current = Data.user }, Cmd.none )
+            ( { model | current = Label.user }, Cmd.none )
 
         Msg.Logout ->
-            ( { model | current = Data.logout }, Cmd.none )
+            ( { model | current = Label.logout }, Cmd.none )
 
         Msg.Mdl msg_ ->
             Material.update Msg.Mdl msg_ model

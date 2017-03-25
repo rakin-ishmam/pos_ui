@@ -7,7 +7,7 @@ import Menu.Model as MenuModel
 import RouteUrl exposing (UrlChange)
 import RouteUrl.Builder as Builder exposing (Builder, builder)
 import Navigation exposing (Location)
-import Menu.Data as MenuData
+import Menu.Label as MenuLabel
 import User.Route as UserRoute
 import User.Msg as UserMsg
 
@@ -24,7 +24,7 @@ delta2builder pre cur =
         view =
             cur.menu.current
     in
-        if view == MenuData.user then
+        if view == MenuLabel.user then
             UserRoute.delta2builder pre.user cur.user
                 |> Maybe.map (Builder.prependToPath [ cur.menu.current ])
         else
@@ -47,35 +47,35 @@ builder2messages builder =
                 subBuilder =
                     Builder.replacePath rest builder
             in
-                if first == MenuData.role then
+                if first == MenuLabel.role then
                     [ Msg.Menu MenuMsg.Role ]
-                else if first == MenuData.logout then
+                else if first == MenuLabel.logout then
                     [ Msg.Menu MenuMsg.Logout ]
-                else if first == MenuData.user then
+                else if first == MenuLabel.user then
                     List.append [ Msg.Menu MenuMsg.User ]
                         <| List.map Msg.User
                         <| UserRoute.builder2messages subBuilder
-                else if first == MenuData.me then
+                else if first == MenuLabel.me then
                     [ Msg.Menu MenuMsg.Me ]
-                else if first == MenuData.sell then
+                else if first == MenuLabel.sell then
                     [ Msg.Menu <|
                         MenuMsg.SelectTab <|
-                            tabInd MenuData.sell
+                            tabInd MenuLabel.sell
                     ]
-                else if first == MenuData.report then
+                else if first == MenuLabel.report then
                     [ Msg.Menu <|
                         MenuMsg.SelectTab <|
-                            tabInd MenuData.report
+                            tabInd MenuLabel.report
                     ]
-                else if first == MenuData.product then
+                else if first == MenuLabel.product then
                     [ Msg.Menu <|
                         MenuMsg.SelectTab <|
-                            tabInd MenuData.product
+                            tabInd MenuLabel.product
                     ]
-                else if first == MenuData.order then
+                else if first == MenuLabel.order then
                     [ Msg.Menu <|
                         MenuMsg.SelectTab <|
-                            tabInd MenuData.order
+                            tabInd MenuLabel.order
                     ]
                 else
                     []
@@ -86,7 +86,7 @@ builder2messages builder =
 
 tabInd : String -> Int
 tabInd val =
-    case MenuData.tabInd val of
+    case MenuLabel.tabInd val of
         Just ind ->
             ind
 

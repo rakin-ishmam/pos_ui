@@ -1,6 +1,6 @@
 module Menu.Model exposing (..)
 
-import Menu.Data as Data
+import Menu.Label as Label
 import Material
 
 
@@ -12,14 +12,14 @@ type alias Model =
 
 init : Model
 init =
-    { current = Data.sell
+    { current = Label.sell
     , mdl = Material.model
     }
 
 
 tabInd : Model -> Int
 tabInd model =
-    case Data.tabInd model.current of
+    case Label.tabInd model.current of
         Just ind ->
             ind
 
@@ -29,7 +29,7 @@ tabInd model =
 
 tabVal : Int -> String
 tabVal ind =
-    case Data.tabVal ind of
+    case Label.tabVal ind of
         Just val ->
             val
 

@@ -1,4 +1,4 @@
-module Menu.Data exposing (..)
+module Menu.Label exposing (..)
 
 import Array
 import Lib.Array as LibArray
