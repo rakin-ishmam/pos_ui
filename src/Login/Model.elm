@@ -1,20 +1,8 @@
-module Login.Model exposing (Model, model, Token, Login)
+module Login.Model exposing (..)
 
 import Material
 import RemoteData exposing (WebData)
-
-
-type alias Login =
-    { username : String
-    , password : String
-    }
-
-
-login : Login
-login =
-    { username = ""
-    , password = ""
-    }
+import Login.Login as Login exposing (Login)
 
 
 type alias Token =
@@ -30,7 +18,21 @@ type alias Model =
 
 model : Model
 model =
-    { login = login
+    { login = Login.login
     , mdl = Material.model
     , token = RemoteData.NotAsked
     }
+
+
+setLogin : Model -> Login -> Model
+setLogin model login =
+    { model | login = login }
+
+
+setToken : Model -> WebData Token -> Model
+setToken model token =
+    { model | token = token }
+
+
+type alias Container c =
+    { c | login : Model }

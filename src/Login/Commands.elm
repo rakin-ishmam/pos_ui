@@ -3,20 +3,21 @@ module Login.Commands exposing (..)
 import Http
 import Json.Decode as Decode
 import Json.Decode.Pipeline exposing (decode, required)
-import Login.Msg as Msg exposing(Msg)
+import Login.Msg as Msg exposing (Msg)
 import Login.Model as Model
 import RemoteData
 import Json.Encode as Encode
+import Login.Login as Login exposing (Login)
 
 
-login : Model.Login -> Cmd Msg
+login : Login -> Cmd Msg
 login data =
     loginRequest data
         |> RemoteData.sendRequest
         |> Cmd.map Msg.OnToken
 
 
-loginRequest : Model.Login -> Http.Request Model.Token
+loginRequest : Login -> Http.Request Model.Token
 loginRequest login =
     Http.request
         { body = loginEncoder login |> Http.jsonBody
@@ -34,7 +35,7 @@ loginUrl =
     "/api/login"
 
 
-loginEncoder : Model.Login -> Encode.Value
+loginEncoder : Login -> Encode.Value
 loginEncoder login =
     let
         attrs =

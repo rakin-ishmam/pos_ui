@@ -55,13 +55,5 @@ view model =
                 , Options.onClick Msg.Login
                 ]
                 [ text "Login" ]
-            , div []
-                [ case model.token of
-                    RemoteData.Success token ->
-                        text token.token
-
-                    _ ->
-                        text "test"
-                ]
             ]
         ]

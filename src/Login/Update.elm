@@ -8,30 +8,35 @@ import Msg as AppMsg
 import RemoteData
 import Tuple
 import Lib.NewCmd as NewCmd
+import Login.Login as Login
 
 
-update : Msg -> Model -> (Msg -> AppMsg.Msg) -> ( Model, Cmd AppMsg.Msg )
+update : Msg -> Model.Container c -> (Msg -> AppMsg.Msg) -> ( Model.Container c, Cmd AppMsg.Msg )
 update msg model conv =
     case msg of
         Msg.Mdl msg_ ->
-            Tuple.mapSecond (Cmd.map conv) (Material.update Msg.Mdl msg_ model)
+            let
+                ( md, ms ) =
+                    Tuple.mapSecond (Cmd.map conv) (Material.update Msg.Mdl msg_ model.login)
+            in
+                ( { model | login = md }, ms )
 
         Msg.Username val ->
             let
                 login =
-                    model.login
+                    Login.setUsername model.login.login val
             in
-                ( { model | login = { login | username = val } }, Cmd.map conv Cmd.none )
+                ( { model | login = Model.setLogin model.login login }, Cmd.map conv Cmd.none )
 
         Msg.Password val ->
             let
                 login =
-                    model.login
+                    Login.setPassword model.login.login val
             in
-                ( { model | login = { login | password = val } }, Cmd.map conv Cmd.none )
+                ( { model | login = Model.setLogin model.login login }, Cmd.map conv Cmd.none )
 
         Msg.Login ->
-            ( model, Cmd.map conv (Commands.login model.login) )
+            ( model, Cmd.map conv (Commands.login model.login.login) )
 
         Msg.OnToken val ->
             let
@@ -42,8 +47,11 @@ update msg model conv =
 
                         _ ->
                             Cmd.map conv Cmd.none
+
+                token =
+                    val
             in
-                ( { model | token = val }, cmd )
+                ( { model | login = Model.setToken model.login token }, cmd )
 
         _ ->
             ( model, Cmd.map conv Cmd.none )

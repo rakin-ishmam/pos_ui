@@ -33,9 +33,9 @@ update msg model =
         Msg.Login loginMsg ->
             let
                 ( md, ms ) =
-                    LoginUpdate.update loginMsg model.login Msg.Login
+                    LoginUpdate.update loginMsg model Msg.Login
             in
-                ( { model | login = md }, ms )
+                ( md, ms )
 
         Msg.Token val ->
             let
