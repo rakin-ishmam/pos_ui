@@ -11,4 +11,5 @@ type Msg
     | User UserMsg.Msg
     | Login LoginMsg.Msg
     | Mdl (Material.Msg Msg)
+    | Token String
     | NoOp

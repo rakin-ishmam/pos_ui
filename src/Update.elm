@@ -1,11 +1,13 @@
 module Update exposing (..)
 
-import Msg exposing(Msg)
+import Msg exposing (Msg)
 import Model exposing (Model)
 import Menu.Update as MenuUpdate
 import User.Update as UserUpdate
 import Login.Update as LoginUpdate
 import Material
+import Config
+import Lib.Storage as Storage
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -31,9 +33,16 @@ update msg model =
         Msg.Login loginMsg ->
             let
                 ( md, ms ) =
-                    LoginUpdate.update loginMsg model.login
+                    LoginUpdate.update loginMsg model.login Msg.Login
             in
-                ( { model | login = md }, Cmd.map Msg.Login ms )
+                ( { model | login = md }, ms )
+
+        Msg.Token val ->
+            let
+                tmp =
+                    Storage.set Config.token val
+            in
+                ( { model | token = val }, Cmd.none )
 
         _ ->
             ( model, Cmd.none )

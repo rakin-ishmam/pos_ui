@@ -5,6 +5,8 @@ import Menu.Model as MenuModel
 import Material
 import User.Model as UserModel
 import Login.Model as LoginModel
+import Native.Storage
+import Config
 
 
 type alias Model =
@@ -12,6 +14,7 @@ type alias Model =
     , user : UserModel.Model
     , login : LoginModel.Model
     , mdl : Material.Model
+    , token : String
     }
 
 
@@ -21,6 +24,7 @@ model =
       , user = UserModel.init
       , login = LoginModel.model
       , mdl = Material.model
+      , token = Native.Storage.get Config.token
       }
     , Cmd.none
     )

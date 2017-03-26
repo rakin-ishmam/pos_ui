@@ -17,14 +17,17 @@ import Menu.Model as MenuModel
 import Menu.Label as MenuLabel
 import Login.View as LoginView
 import List
+import String
 
 
 view : Model -> Html Msg
 view model =
-    -- Scheme.topWithScheme Color.Teal Color.Red (appView model)
-    Scheme.topWithScheme Color.Teal Color.Red <|
-        loginView <|
-            model
+    if String.length model.token > 0 then
+        Scheme.topWithScheme Color.Teal Color.Red (appView model)
+    else
+        Scheme.topWithScheme Color.Teal Color.Red <|
+            loginView <|
+                model
 
 
 loginView : Model -> Html Msg
