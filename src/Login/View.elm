@@ -31,7 +31,7 @@ view model =
                 model.mdl
                 [ Textfield.label "Username"
                 , Textfield.floatingLabel
-                , Textfield.text_
+                , Textfield.value model.login.username
                 , Options.onInput Msg.Username
                 , Options.css "width" "100%"
                 ]
@@ -42,8 +42,8 @@ view model =
                 [ Textfield.label "Password"
                 , Textfield.floatingLabel
                 , Options.css "width" "100%"
+                , Textfield.value model.login.password
                 , Options.onInput Msg.Password
-                , Textfield.text_
                 ]
                 []
             , Button.render Msg.Mdl
@@ -59,6 +59,7 @@ view model =
                 [ case model.token of
                     RemoteData.Success token ->
                         text token.token
+
                     _ ->
                         text "test"
                 ]

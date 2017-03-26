@@ -3,7 +3,6 @@ module Login.Update exposing (..)
 import Login.Msg as Msg exposing (Msg)
 import Login.Model as Model exposing (Model)
 import Material
-import Debug
 import Login.Commands as Commands
 
 
@@ -11,7 +10,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Msg.Mdl msg_ ->
-            Material.update Msg.Mdl msg_ model |> Just
+            Material.update Msg.Mdl msg_ model
 
         Msg.Username val ->
             let
