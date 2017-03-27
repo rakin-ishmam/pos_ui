@@ -41,8 +41,7 @@ loginView model =
         , drawer = []
         , tabs = ( [], [] )
         , main =
-            [ Html.map Msg.Login <|
-                LoginView.view model.login
+            [ LoginView.view model Msg.Login
             ]
         }
 

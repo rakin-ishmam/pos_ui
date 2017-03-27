@@ -1,4 +1,4 @@
-module Login.View exposing (..)
+module Login.View exposing (view)
 
 import Login.Model as Model exposing (Model)
 import Login.Msg as Msg exposing (Msg)
@@ -8,11 +8,15 @@ import Material.Elevation as Elevation
 import Material.Textfield as Textfield
 import Material.Typography as Typo
 import Material.Button as Button
-import RemoteData
 
 
-view : Model -> Html Msg
-view model =
+view : Model.Container c -> (Msg -> a) -> Html a
+view model msgMap =
+    Html.map msgMap <| loginView model.login
+
+
+loginView : Model -> Html Msg
+loginView model =
     Options.div
         [ Options.css "padding-top" "80px"
         , Options.css "width" "100%"
