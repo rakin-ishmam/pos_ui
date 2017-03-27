@@ -8,6 +8,7 @@ import Login.Model as Model
 import RemoteData
 import Json.Encode as Encode
 import Login.Login as Login exposing (Login)
+import Lib.Request as Request
 
 
 login : Login -> Cmd Msg
@@ -19,15 +20,7 @@ login data =
 
 loginRequest : Login -> Http.Request Model.Token
 loginRequest login =
-    Http.request
-        { body = loginEncoder login |> Http.jsonBody
-        , expect = Http.expectJson tokenDecoder
-        , headers = []
-        , method = "POST"
-        , timeout = Nothing
-        , url = loginUrl
-        , withCredentials = False
-        }
+    Request.post [] (loginEncoder login |> Http.jsonBody) (Http.expectJson tokenDecoder) loginUrl
 
 
 loginUrl : String
