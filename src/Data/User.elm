@@ -6,7 +6,8 @@ import Json.Encode as Encode
 
 
 type alias User =
-    { name : String
+    { id : String
+    , name : String
     , username : String
     , language : String
     , avtFileId : String
@@ -16,14 +17,20 @@ type alias User =
     , gender : String
     , phone : List String
     , password : String
+    , deleted : Bool
+    , createdAt : String
+    , createdBy : String
+    , modifiedAt : String
+    , modifiedBy : String
     }
 
 
-loginEncoder : User -> Encode.Value
-loginEncoder user =
+encoder : User -> Encode.Value
+encoder user =
     let
         attrs =
-            [ ( "username", Encode.string user.username )
+            [ ( "id", Encode.string user.id )
+            , ( "username", Encode.string user.username )
             , ( "name", Encode.string user.name )
             , ( "language", Encode.string user.language )
             , ( "avt_file_id", Encode.string user.avtFileId )
@@ -33,14 +40,19 @@ loginEncoder user =
             , ( "gender", Encode.string user.gender )
             , ( "phone", Encode.list (List.map Encode.string user.phone) )
             , ( "password", Encode.string user.password )
+            , ( "created_at", Encode.string user.createdAt )
+            , ( "created_by", Encode.string user.createdBy )
+            , ( "modified_at", Encode.string user.modifiedAt )
+            , ( "modified_by", Encode.string user.modifiedBy )
             ]
     in
         Encode.object attrs
 
 
-tokenDecoder : Decode.Decoder User
-tokenDecoder =
+decoder : Decode.Decoder User
+decoder =
     decode User
+        |> required "id" Decode.string
         |> required "username" Decode.string
         |> required "name" Decode.string
         |> required "language" Decode.string
@@ -51,3 +63,8 @@ tokenDecoder =
         |> required "gender" Decode.string
         |> required "phone" (Decode.list Decode.string)
         |> required "password" Decode.string
+        |> required "deleted" Decode.bool
+        |> required "created_at" Decode.string
+        |> required "created_by" Decode.string
+        |> required "modified_at" Decode.string
+        |> required "modified_by" Decode.string
