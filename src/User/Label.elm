@@ -1,4 +1,4 @@
-module User.Data exposing (..)
+module User.Label exposing (..)
 
 import Array
 import Lib.Array as LibArray

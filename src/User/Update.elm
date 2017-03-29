@@ -2,7 +2,7 @@ module User.Update exposing (..)
 
 import User.Model as Model exposing (Model)
 import User.Msg as Msg exposing (Msg)
-import User.Data as UserData
+import User.Label as Label
 import Material
 
 
@@ -13,16 +13,16 @@ update msg model =
             Material.update Msg.Mdl msg_ model
 
         Msg.Create ->
-            ( { model | view = UserData.create }, Cmd.none )
+            ( { model | view = Label.create }, Cmd.none )
 
         Msg.Lst ->
-            ( { model | view = UserData.list }, Cmd.none )
+            ( { model | view = Label.list }, Cmd.none )
 
         Msg.Detail id ->
-            ( { model | view = UserData.detail }, Cmd.none )
+            ( { model | view = Label.detail }, Cmd.none )
 
         Msg.Edit id ->
-            ( { model | view = UserData.edit }, Cmd.none )
+            ( { model | view = Label.edit }, Cmd.none )
 
         _ ->
             ( model, Cmd.none )

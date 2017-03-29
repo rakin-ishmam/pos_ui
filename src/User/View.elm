@@ -6,20 +6,19 @@ import Html exposing (Html, h5, div, p, text, table, tr, td, map)
 import Material.Tabs as Tabs
 import Material.Typography as Typo
 import Material.Options as Options
-import User.Data as UserData
+import User.Label as Label
 import Material.Grid as Grid
 import Material.Chip as Chip
 
-
 view : Model -> Html Msg
 view model =
-    if model.view == UserData.create then
+    if model.view == Label.create then
         tabView model
-    else if model.view == UserData.list then
+    else if model.view == Label.list then
         tabView model
-    else if model.view == UserData.detail then
+    else if model.view == Label.detail then
         detailView model
-    else if model.view == UserData.edit then
+    else if model.view == Label.edit then
         editView model
     else
         div [] []
@@ -36,10 +35,10 @@ tabView model =
         ]
         [ Tabs.label
             [ Options.center, Options.css "width" "50%" ]
-            [ text UserData.list ]
+            [ text Label.list ]
         , Tabs.label
             [ Options.center, Options.css "width" "50%" ]
-            [ text UserData.create ]
+            [ text Label.create ]
         ]
         []
 
@@ -51,11 +50,11 @@ activeTab model =
 
 selectTab : Int -> Msg
 selectTab ind =
-    case UserData.tabVal ind of
+    case Label.tabVal ind of
         Just val ->
-            if val == UserData.list then
+            if val == Label.list then
                 Msg.Lst
-            else if val == UserData.create then
+            else if val == Label.create then
                 Msg.Create
             else
                 Msg.None
@@ -77,6 +76,7 @@ detailView model =
                 ]
             ]
         ]
+
 
 
 editView : Model -> Html Msg
