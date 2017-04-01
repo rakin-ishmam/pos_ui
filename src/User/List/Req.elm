@@ -12,6 +12,10 @@ loginUrl query =
     "/api/user/list?" ++ (Query.toURL query)
 
 
+fetchList : Query -> Cmd Msg
+fetchList query =
+
+
 fetchListRequest : Query -> Http.Request (List User)
 fetchListRequest query =
     Request.get [] (Http.expectJson User.listDecoder) (loginUrl query)
