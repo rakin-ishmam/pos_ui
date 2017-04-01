@@ -8,5 +8,5 @@ import Data.User as User exposing (User)
 type Msg
     = None
     | Mdl (Material.Msg Msg)
-    | OnToken (WebData (List User))
+    | OnList (WebData (List User))
     | FetchList

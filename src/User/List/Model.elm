@@ -33,6 +33,16 @@ type alias Container c =
     }
 
 
+addSkip : Model -> Model
+addSkip modle =
+    { model | query = Query.increaseSkip model.query }
+
+
 addUsers : Model -> List User -> Model
 addUsers model users =
-    { model | users = List.append model.users users }
+    { model | users = List.append model.users users, status = Nothing }
+
+
+loading : Model -> Model
+loading model =
+    { model | status = Loading }
