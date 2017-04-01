@@ -3,13 +3,13 @@ module Lib.Request exposing (..)
 import Http
 
 
-get : List Http.Header -> Http.Body -> Http.Expect a -> String -> Http.Request a
-get headers body expect url =
+get : List Http.Header -> Http.Expect a -> String -> Http.Request a
+get headers expect url =
     Http.request
         { method = "GET"
         , headers = headers
         , url = url
-        , body = body
+        , body = Http.emptyBody
         , expect = expect
         , timeout = Nothing
         , withCredentials = False

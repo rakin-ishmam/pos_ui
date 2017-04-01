@@ -49,6 +49,11 @@ encoder user =
         Encode.object attrs
 
 
+listDecoder : Decode.Decoder (List User)
+listDecoder =
+    Decode.list decoder
+
+
 decoder : Decode.Decoder User
 decoder =
     decode User

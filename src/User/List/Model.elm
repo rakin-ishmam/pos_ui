@@ -1,6 +1,8 @@
 module User.List.Model exposing (..)
 
 import Data.User as User exposing (User)
+import Material
+import User.List.Query as Query exposing (Query)
 
 
 type Status
@@ -10,24 +12,27 @@ type Status
 
 type alias Model =
     { users : List User
-    , skip : Int
+    , query : Query
     , status : Status
+    , mdl : Material.Model
     }
 
 
 model : Model
 model =
     { users = []
-    , skip = 0
+    , query = Query.query
     , status = Nothing
+    , mdl = Material.model
+    }
+
+
+type alias Container c =
+    { c
+        | list : Model
     }
 
 
 addUsers : Model -> List User -> Model
 addUsers model users =
     { model | users = List.append model.users users }
-
-
-addSkip : Model -> Int -> Model
-addSkip model skip =
-    { model | skip = model.skip + skip }
