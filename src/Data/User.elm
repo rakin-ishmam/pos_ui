@@ -1,7 +1,7 @@
 module Data.User exposing (..)
 
 import Json.Decode as Decode
-import Json.Decode.Pipeline exposing (decode, required)
+import Json.Decode.Pipeline exposing (decode, required, optional)
 import Json.Encode as Encode
 
 
@@ -67,7 +67,7 @@ decoder =
         |> required "address" Decode.string
         |> required "gender" Decode.string
         |> required "phone" (Decode.list Decode.string)
-        |> required "password" Decode.string
+        |> optional "password" Decode.string ""
         |> required "deleted" Decode.bool
         |> required "created_at" Decode.string
         |> required "created_by" Decode.string

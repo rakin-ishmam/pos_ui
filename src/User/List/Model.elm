@@ -27,12 +27,6 @@ model =
     }
 
 
-type alias Container c =
-    { c
-        | list : Model
-    }
-
-
 addSkip : Model -> Model
 addSkip modle =
     { model | query = Query.increaseSkip model.query }

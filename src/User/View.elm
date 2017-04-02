@@ -9,13 +9,17 @@ import Material.Options as Options
 import User.Label as Label
 import Material.Grid as Grid
 import Material.Chip as Chip
+import User.List.View as UserView
+
 
 view : Model -> Html Msg
 view model =
     if model.view == Label.create then
-        tabView model
+        tabView model <| div [] [ text "create" ]
     else if model.view == Label.list then
-        tabView model
+        tabView model <|
+            Html.map Msg.UserList <|
+                UserView.view model.list
     else if model.view == Label.detail then
         detailView model
     else if model.view == Label.edit then
@@ -24,8 +28,8 @@ view model =
         div [] []
 
 
-tabView : Model -> Html Msg
-tabView model =
+tabView : Model -> Html Msg -> Html Msg
+tabView model child =
     Tabs.render Msg.Mdl
         [ 0 ]
         model.mdl
@@ -40,7 +44,7 @@ tabView model =
             [ Options.center, Options.css "width" "50%" ]
             [ text Label.create ]
         ]
-        []
+        [ child ]
 
 
 activeTab : Model -> Int
@@ -76,7 +80,6 @@ detailView model =
                 ]
             ]
         ]
-
 
 
 editView : Model -> Html Msg

@@ -7,29 +7,26 @@ import User.List.Req as Req
 import RemoteData
 
 
-update : String -> Msg -> Model.Container c -> (Msg -> a) -> ( Model.Container c, Cmd a )
-update token msg model msgMap =
+update : String -> Msg -> Model -> ( Model, Cmd Msg )
+update token msg model =
     case msg of
         Msg.Mdl msg_ ->
             let
                 ( mdl, ms ) =
-                    Material.update Msg.Mdl msg_ model.list
+                    Material.update Msg.Mdl msg_ model
             in
-                ( { model | list = mdl }, Cmd.map msgMap ms )
+                ( mdl, ms )
 
         Msg.FetchList ->
-            if model.list.status == Model.Loading then
+            if model.status == Model.Loading then
                 ( model, Cmd.none )
             else
-                ( { model | list = Model.loading model.list }
-                , Cmd.map msgMap <|
-                    Req.fetchList model.list.query token
-                )
+                ( Model.loading model, Req.fetchList model.query token )
 
         Msg.OnList dt ->
             case dt of
                 RemoteData.Success lst ->
-                    ( { model | list = Model.addUsers model.list lst }, Cmd.none )
+                    ( Model.addUsers model lst, Cmd.none )
 
                 _ ->
                     ( model, Cmd.none )

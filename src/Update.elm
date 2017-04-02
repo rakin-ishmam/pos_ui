@@ -26,7 +26,7 @@ update msg model =
         Msg.User userMsg ->
             let
                 ( md, ms ) =
-                    UserUpdate.update userMsg model.user
+                    UserUpdate.update model.token userMsg model.user
             in
                 ( { model | user = md }, Cmd.map Msg.User ms )
 

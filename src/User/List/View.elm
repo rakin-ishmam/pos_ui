@@ -1,26 +1,29 @@
-module Uset.List.View exposing (..)
+module User.List.View exposing (view)
 
 import User.List.Model as Model exposing (Model)
 import Html exposing (Html, text)
 import User.List.Msg as Msg exposing (Msg)
 import Material.Table as Table
 import Data.User as User exposing (User)
+import Material.Options as Options
 
 
-view : Model.Container c -> (Msg -> a) -> Html a
-view model msgMap =
-    Html.map msgMap <|
-        userTable model.list.users
+view : Model -> Html Msg
+view model =
+    userTable model.users
 
 
 userTable : List User -> Html Msg
 userTable users =
-    Table.table []
+    Table.table [ Options.css "width" "100%" ]
         [ Table.thead []
             [ Table.tr []
                 [ Table.th [] [ text "Name" ]
                 , Table.th [] [ text "Username" ]
-                , Table.th [] [ text "Unit Price" ]
+                , Table.th [] [ text "Emal" ]
+                , Table.th [] [ text "Gender" ]
+                , Table.th [] [ text "Phone" ]
+                , Table.th [] [ text "Address" ]
                 ]
             ]
         , Table.tbody []

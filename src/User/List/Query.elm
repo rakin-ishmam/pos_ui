@@ -23,4 +23,4 @@ increaseSkip query =
 
 toURL : Query -> String
 toURL query =
-    "skip=" ++ (toString query.skip) ++ "&limit" ++ (toString query.limit)
+    "skip=" ++ (toString query.skip) ++ "&limit=" ++ (toString query.limit)
