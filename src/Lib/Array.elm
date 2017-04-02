@@ -1,12 +1,13 @@
-module Lib.Array exposing(..)
+module Lib.Array exposing (..)
 
 import Array
+
 
 index : (a -> Bool) -> Int -> Array.Array a -> Maybe Int
 index filter start array =
     if start >= Array.length array then
         Nothing
-    else 
+    else
         case Array.get start array of
             Just val ->
                 if filter val then

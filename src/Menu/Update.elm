@@ -1,28 +1,28 @@
 module Menu.Update exposing (..)
 
-import Menu.Message as Message
-import Menu.Model as Model
-import Menu.Data as Data
+import Menu.Msg as Msg exposing(Msg)
+import Menu.Model as Model exposing(Model)
+import Menu.Label as Label
 import Material
 
 
-update : Message.Msg -> Model.Model -> ( Model.Model, Cmd Message.Msg )
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Message.SelectTab ind ->
+        Msg.SelectTab ind ->
             ( { model | current = Model.tabVal ind }, Cmd.none )
 
-        Message.Role ->
-            ( { model | current = Data.role }, Cmd.none )
+        Msg.Role ->
+            ( { model | current = Label.role }, Cmd.none )
 
-        Message.Me ->
-            ( { model | current = Data.me }, Cmd.none )
+        Msg.Me ->
+            ( { model | current = Label.me }, Cmd.none )
 
-        Message.User ->
-            ( { model | current = Data.user }, Cmd.none )
+        Msg.User ->
+            ( { model | current = Label.user }, Cmd.none )
 
-        Message.Logout ->
-            ( { model | current = Data.logout }, Cmd.none )
+        Msg.Logout ->
+            ( { model | current = Label.logout }, Cmd.none )
 
-        Message.Mdl msg_ ->
-            Material.update Message.Mdl msg_ model
+        Msg.Mdl msg_ ->
+            Material.update Msg.Mdl msg_ model
