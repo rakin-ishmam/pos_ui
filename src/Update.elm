@@ -4,6 +4,7 @@ import Msg exposing (Msg)
 import Model exposing (Model)
 import Menu.Update as MenuUpdate
 import User.Update as UserUpdate
+import Role.Update as RoleUpdate
 import Login.Update as LoginUpdate
 import Material
 import Config
@@ -29,6 +30,13 @@ update msg model =
                     UserUpdate.update model.token userMsg model.user
             in
                 ( { model | user = md }, Cmd.map Msg.User ms )
+
+        Msg.Role roleMsg ->
+            let
+                ( md, ms ) =
+                    RoleUpdate.update model.token roleMsg model.role
+            in
+                ( { model | role = md }, Cmd.map Msg.Role ms )
 
         Msg.Login loginMsg ->
             let

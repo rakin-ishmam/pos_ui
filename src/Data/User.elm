@@ -57,19 +57,19 @@ listDecoder =
 decoder : Decode.Decoder User
 decoder =
     decode User
-        |> required "id" Decode.string
-        |> required "username" Decode.string
-        |> required "name" Decode.string
-        |> required "language" Decode.string
-        |> required "avt_file_id" Decode.string
-        |> required "role_id" Decode.string
-        |> required "email" Decode.string
-        |> required "address" Decode.string
-        |> required "gender" Decode.string
-        |> required "phone" (Decode.list Decode.string)
+        |> optional "id" Decode.string ""
+        |> optional "username" Decode.string ""
+        |> optional "name" Decode.string ""
+        |> optional "language" Decode.string ""
+        |> optional "avt_file_id" Decode.string ""
+        |> optional "role_id" Decode.string ""
+        |> optional "email" Decode.string ""
+        |> optional "address" Decode.string ""
+        |> optional "gender" Decode.string ""
+        |> optional "phone" (Decode.list Decode.string) []
         |> optional "password" Decode.string ""
-        |> required "deleted" Decode.bool
-        |> required "created_at" Decode.string
-        |> required "created_by" Decode.string
-        |> required "modified_at" Decode.string
-        |> required "modified_by" Decode.string
+        |> optional "deleted" Decode.bool False
+        |> optional "created_at" Decode.string ""
+        |> optional "created_by" Decode.string ""
+        |> optional "modified_at" Decode.string ""
+        |> optional "modified_by" Decode.string ""

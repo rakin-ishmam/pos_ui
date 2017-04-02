@@ -13,6 +13,7 @@ import Material.Layout as Layout
 import Menu.Msg as MenuMsg
 import Menu.View as MenuView
 import User.View as UserView
+import Role.View as RoleView
 import Menu.Model as MenuModel
 import Menu.Label as MenuLabel
 import Login.View as LoginView
@@ -80,6 +81,8 @@ pickView model =
     in
         if cur == MenuLabel.user then
             Html.map Msg.User (UserView.view model.user)
+        else if cur == MenuLabel.role then
+            Html.map Msg.Role (RoleView.view model.role)
         else
             div [] []
 

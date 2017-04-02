@@ -1,7 +1,7 @@
 module Data.Role exposing (..)
 
 import Json.Decode as Decode
-import Json.Decode.Pipeline exposing (decode, required)
+import Json.Decode.Pipeline exposing (decode, required, optional)
 import Json.Encode as Encode
 
 
@@ -48,19 +48,24 @@ encoder role =
 decoder : Decode.Decoder Role
 decoder =
     decode Role
-        |> required "id" Decode.string
-        |> required "name" Decode.string
-        |> required "user_acces" (Decode.list Decode.string)
-        |> required "role_acces" (Decode.list Decode.string)
-        |> required "category_access" (Decode.list Decode.string)
-        |> required "customer_access" (Decode.list Decode.string)
-        |> required "inventory_access" (Decode.list Decode.string)
-        |> required "product_access" (Decode.list Decode.string)
-        |> required "sell_access" (Decode.list Decode.string)
-        |> required "payment_access" (Decode.list Decode.string)
-        |> required "file_access" (Decode.list Decode.string)
-        |> required "deleted" Decode.bool
-        |> required "created_at" Decode.string
-        |> required "created_by" Decode.string
-        |> required "modified_at" Decode.string
-        |> required "modified_by" Decode.string
+        |> optional "id" Decode.string ""
+        |> optional "name" Decode.string ""
+        |> optional "user_access" (Decode.list Decode.string) []
+        |> optional "role_access" (Decode.list Decode.string) []
+        |> optional "category_access" (Decode.list Decode.string) []
+        |> optional "customer_access" (Decode.list Decode.string) []
+        |> optional "inventory_access" (Decode.list Decode.string) []
+        |> optional "product_access" (Decode.list Decode.string) []
+        |> optional "sell_access" (Decode.list Decode.string) []
+        |> optional "payment_access" (Decode.list Decode.string) []
+        |> optional "file_access" (Decode.list Decode.string) []
+        |> optional "deleted" Decode.bool False
+        |> optional "created_at" Decode.string ""
+        |> optional "created_by" Decode.string ""
+        |> optional "modified_at" Decode.string ""
+        |> optional "modified_by" Decode.string ""
+
+
+listDecoder : Decode.Decoder (List Role)
+listDecoder =
+    Decode.list decoder

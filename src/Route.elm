@@ -9,6 +9,7 @@ import RouteUrl.Builder as Builder exposing (Builder, builder)
 import Navigation exposing (Location)
 import Menu.Label as MenuLabel
 import User.Route as UserRoute
+import Role.Route as RoleRoute
 import User.Msg as UserMsg
 
 
@@ -27,6 +28,9 @@ delta2builder pre cur =
         if view == MenuLabel.user then
             UserRoute.delta2builder pre.user cur.user
                 |> Maybe.map (Builder.prependToPath [ cur.menu.current ])
+        else if view == MenuLabel.role then
+            RoleRoute.delta2builder pre.role cur.role
+                |> Maybe.map (Builder.prependToPath [ cur.menu.current ])
         else
             Just <|
                 Builder.replacePath [ cur.menu.current ] <|
@@ -41,9 +45,8 @@ url2messages location =
 builder2messages : Builder -> List Msg
 builder2messages builder =
     case Builder.path builder of
-        
         first :: rest ->
-            let 
+            let
                 subBuilder =
                     Builder.replacePath rest builder
             in
@@ -52,9 +55,9 @@ builder2messages builder =
                 else if first == MenuLabel.logout then
                     [ Msg.Menu MenuMsg.Logout ]
                 else if first == MenuLabel.user then
-                    List.append [ Msg.Menu MenuMsg.User ]
-                        <| List.map Msg.User
-                        <| UserRoute.builder2messages subBuilder
+                    List.append [ Msg.Menu MenuMsg.User ] <|
+                        List.map Msg.User <|
+                            UserRoute.builder2messages subBuilder
                 else if first == MenuLabel.me then
                     [ Msg.Menu MenuMsg.Me ]
                 else if first == MenuLabel.sell then
