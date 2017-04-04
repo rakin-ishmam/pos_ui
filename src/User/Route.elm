@@ -20,7 +20,7 @@ builder2messages builder =
             if first == Label.create then
                 [ Msg.Create ]
             else if first == Label.list then
-                [ Msg.Lst ]
+                []
             else if first == Label.detail then
                 [ Msg.Detail "test" ]
             else if first == Label.edit then

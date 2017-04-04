@@ -18,13 +18,3 @@ init =
     , mdl = Material.model
     , list = ListModel.model
     }
-
-
-tabInd : Model -> Int
-tabInd model =
-    case Label.tabInd model.view of
-        Just ind ->
-            ind
-
-        _ ->
-            -1

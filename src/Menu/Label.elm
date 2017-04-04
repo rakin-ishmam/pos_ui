@@ -49,21 +49,6 @@ report =
     "Report"
 
 
-tabInd : String -> Maybe Int
-tabInd val =
-    LibArray.index (filter val) 0 (Array.fromList tabList)
-
-
-tabVal : Int -> Maybe String
-tabVal ind =
-    Array.get ind (Array.fromList tabList)
-
-
-tabList : List String
-tabList =
-    [ sell, order, product, report ]
-
-
 drawerList : List String
 drawerList =
     [ role, me, user, logout ]

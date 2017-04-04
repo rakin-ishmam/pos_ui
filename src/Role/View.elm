@@ -10,14 +10,15 @@ import Role.Label as Label
 import Material.Grid as Grid
 import Material.Chip as Chip
 import Role.List.View as RoleView
+import Material.Grid
 
 
 view : Model -> Html Msg
 view model =
     if model.view == Label.create then
-        tabView model <| div [] [ text "create" ]
+        gridView model <| div [] [ text "create" ]
     else if model.view == Label.list then
-        tabView model <|
+        gridView model <|
             Html.map Msg.RoleList <|
                 RoleView.view model.list
     else if model.view == Label.detail then
@@ -28,43 +29,11 @@ view model =
         div [] []
 
 
-tabView : Model -> Html Msg -> Html Msg
-tabView model child =
-    Tabs.render Msg.Mdl
-        [ 0 ]
-        model.mdl
-        [ Tabs.ripple
-        , Tabs.onSelectTab selectTab
-        , Tabs.activeTab (activeTab model)
+gridView : Model -> Html Msg -> Html Msg
+gridView model child =
+    Grid.grid []
+        [ Grid.cell [ Grid.size Grid.All 12 ] [ child ]
         ]
-        [ Tabs.label
-            [ Options.center, Options.css "width" "50%" ]
-            [ text Label.list ]
-        , Tabs.label
-            [ Options.center, Options.css "width" "50%" ]
-            [ text Label.create ]
-        ]
-        [ child ]
-
-
-activeTab : Model -> Int
-activeTab model =
-    Model.tabInd model
-
-
-selectTab : Int -> Msg
-selectTab ind =
-    case Label.tabVal ind of
-        Just val ->
-            if val == Label.list then
-                Msg.Lst
-            else if val == Label.create then
-                Msg.Create
-            else
-                Msg.None
-
-        _ ->
-            Msg.None
 
 
 detailView : Model -> Html Msg

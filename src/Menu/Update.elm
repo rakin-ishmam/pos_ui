@@ -1,7 +1,7 @@
 module Menu.Update exposing (..)
 
-import Menu.Msg as Msg exposing(Msg)
-import Menu.Model as Model exposing(Model)
+import Menu.Msg as Msg exposing (Msg)
+import Menu.Model as Model exposing (Model)
 import Menu.Label as Label
 import Material
 
@@ -9,9 +9,6 @@ import Material
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Msg.SelectTab ind ->
-            ( { model | current = Model.tabVal ind }, Cmd.none )
-
         Msg.Role ->
             ( { model | current = Label.role }, Cmd.none )
 
@@ -23,6 +20,18 @@ update msg model =
 
         Msg.Logout ->
             ( { model | current = Label.logout }, Cmd.none )
+
+        Msg.Product ->
+            ( { model | current = Label.product }, Cmd.none )
+
+        Msg.Order ->
+            ( { model | current = Label.order }, Cmd.none )
+
+        Msg.Report ->
+            ( { model | current = Label.report }, Cmd.none )
+
+        Msg.Sell ->
+            ( { model | current = Label.sell }, Cmd.none )
 
         Msg.Mdl msg_ ->
             Material.update Msg.Mdl msg_ model

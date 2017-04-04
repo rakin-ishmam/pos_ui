@@ -1,8 +1,13 @@
 module Menu.Msg exposing (..)
+
 import Material
 
+
 type Msg
-    = SelectTab Int
+    = Product
+    | Sell
+    | Order
+    | Report
     | Role
     | Logout
     | User

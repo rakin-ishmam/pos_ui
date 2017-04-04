@@ -61,37 +61,15 @@ builder2messages builder =
                 else if first == MenuLabel.me then
                     [ Msg.Menu MenuMsg.Me ]
                 else if first == MenuLabel.sell then
-                    [ Msg.Menu <|
-                        MenuMsg.SelectTab <|
-                            tabInd MenuLabel.sell
-                    ]
+                    [ Msg.Menu MenuMsg.Sell ]
                 else if first == MenuLabel.report then
-                    [ Msg.Menu <|
-                        MenuMsg.SelectTab <|
-                            tabInd MenuLabel.report
-                    ]
+                    [ Msg.Menu MenuMsg.Report ]
                 else if first == MenuLabel.product then
-                    [ Msg.Menu <|
-                        MenuMsg.SelectTab <|
-                            tabInd MenuLabel.product
-                    ]
+                    [ Msg.Menu MenuMsg.Product ]
                 else if first == MenuLabel.order then
-                    [ Msg.Menu <|
-                        MenuMsg.SelectTab <|
-                            tabInd MenuLabel.order
-                    ]
+                    [ Msg.Menu MenuMsg.Order ]
                 else
                     []
 
         _ ->
             []
-
-
-tabInd : String -> Int
-tabInd val =
-    case MenuLabel.tabInd val of
-        Just ind ->
-            ind
-
-        _ ->
-            -1

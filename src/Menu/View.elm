@@ -10,21 +10,24 @@ import Material.Typography as Typo
 import Material.Color as Color
 
 
-tabView : Model -> List (Html Msg)
-tabView model =
-    List.map dataToView Label.tabList
-
-
-dataToView tab =
-    text tab
-
-
 drawerView : Model.Model -> List (Html Msg)
 drawerView model =
-    [ Layout.title [] [ text "Karkhana" ]
+    [ Layout.title [] []
     , Layout.navigation
         []
         [ Layout.link
+            (drawerAttr model Msg.Sell)
+            [ text Label.sell ]
+        , Layout.link
+            (drawerAttr model Msg.Order)
+            [ text Label.order ]
+        , Layout.link
+            (drawerAttr model Msg.Product)
+            [ text Label.product ]
+        , Layout.link
+            (drawerAttr model Msg.Report)
+            [ text Label.report ]
+        , Layout.link
             (drawerAttr model Msg.Me)
             [ text Label.me ]
         , Layout.link
@@ -45,6 +48,12 @@ drawerAttr model msg =
     [ Typo.body1
     , Options.onClick msg
     , case msg of
+        Msg.Product ->
+            if model.current == Label.product then
+                Color.background (Color.color Color.Grey Color.S300)
+            else
+                Options.nop
+
         Msg.Me ->
             if model.current == Label.me then
                 Color.background (Color.color Color.Grey Color.S300)
@@ -65,6 +74,24 @@ drawerAttr model msg =
 
         Msg.Logout ->
             if model.current == Label.logout then
+                Color.background (Color.color Color.Grey Color.S300)
+            else
+                Options.nop
+
+        Msg.Sell ->
+            if model.current == Label.sell then
+                Color.background (Color.color Color.Grey Color.S300)
+            else
+                Options.nop
+
+        Msg.Order ->
+            if model.current == Label.order then
+                Color.background (Color.color Color.Grey Color.S300)
+            else
+                Options.nop
+
+        Msg.Report ->
+            if model.current == Label.report then
                 Color.background (Color.color Color.Grey Color.S300)
             else
                 Options.nop

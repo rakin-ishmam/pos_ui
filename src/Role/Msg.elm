@@ -12,3 +12,8 @@ type Msg
     | Edit String
     | Mdl (Material.Msg Msg)
     | RoleList RoleMsg.Msg
+
+
+init : Msg
+init =
+    Lst

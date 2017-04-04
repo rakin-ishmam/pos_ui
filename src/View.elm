@@ -51,23 +51,13 @@ appView model =
     Layout.render Msg.Mdl
         model.mdl
         [ Layout.fixedHeader
-        , Layout.fixedDrawer
         , Layout.fixedTabs
-        , Layout.selectedTab <|
-            MenuModel.tabInd model.menu
-        , Layout.onSelectTab selectTab
         ]
         { header = [ Layout.row [] [ Layout.title [] [ text "Karkhana" ] ] ]
         , drawer =
             List.map (Html.map Msg.Menu) <|
                 MenuView.drawerView model.menu
-        , tabs =
-            ( List.map (Html.map Msg.Menu) <|
-                MenuView.tabView model.menu
-            , [ Color.background <|
-                    Color.color Color.Teal Color.S400
-              ]
-            )
+        , tabs = ( [], [] )
         , main =
             [ pickView model
             ]
@@ -86,9 +76,3 @@ pickView model =
             Html.map Msg.Role (RoleView.view model.role)
         else
             div [] []
-
-
-selectTab : Int -> Msg
-selectTab ind =
-    Msg.Menu <|
-        MenuMsg.SelectTab ind
