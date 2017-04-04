@@ -1,7 +1,7 @@
 module Menu.View exposing (..)
 
-import Menu.Msg as Msg exposing(Msg)
-import Menu.Model as Model exposing(Model)
+import Menu.Msg as Msg exposing (Msg)
+import Menu.Model as Model exposing (Model)
 import Menu.Label as Label
 import Html exposing (Html, p, div, ul, li, text, a, h3, td, map, span)
 import Material.Options as Options exposing (css)

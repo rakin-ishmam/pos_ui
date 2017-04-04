@@ -51,6 +51,7 @@ appView model =
     Layout.render Msg.Mdl
         model.mdl
         [ Layout.fixedHeader
+        , Layout.fixedDrawer
         , Layout.fixedTabs
         , Layout.selectedTab <|
             MenuModel.tabInd model.menu

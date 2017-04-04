@@ -1,18 +1,15 @@
 module User.List.Msg exposing (..)
 
 import Material
-import RemoteData exposing (WebData)
-import Data.User as User exposing (User)
-import Lib.NewCmd as NewCmd
+import Store.User.Msg as StoreMsg
 
 
 type Msg
     = None
     | Mdl (Material.Msg Msg)
-    | OnList (WebData (List User))
-    | FetchList
+    | Store StoreMsg.Msg
 
 
 init : Cmd Msg
 init =
-    NewCmd.cmd FetchList
+    Cmd.map Store StoreMsg.init

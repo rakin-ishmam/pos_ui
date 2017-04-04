@@ -10,7 +10,7 @@ import Material.Options as Options
 
 view : Model -> Html Msg
 view model =
-    userTable model.users
+    userTable model.store.users
 
 
 userTable : List User -> Html Msg

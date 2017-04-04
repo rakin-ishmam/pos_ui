@@ -1,15 +1,15 @@
-module User.List.Req exposing (fetchList)
+module Store.User.Req exposing (fetchList)
 
-import User.List.Msg as Msg exposing (..)
-import User.List.Query as Query exposing (Query)
+import Store.User.Msg as Msg exposing (..)
+import Store.User.Query as Query exposing (Query)
 import Data.User as User exposing (User)
 import Http
 import Lib.Request as Request
 import RemoteData
 
 
-loginUrl : Query -> String
-loginUrl query =
+listUrl : Query -> String
+listUrl query =
     "/api/user/list?" ++ (Query.toURL query)
 
 
@@ -22,4 +22,4 @@ fetchList query token =
 
 fetchListRequest : Query -> String -> Http.Request (List User)
 fetchListRequest query token =
-    Request.get [ ( "Authorization", token ) ] (Http.expectJson User.listDecoder) (loginUrl query)
+    Request.get [ ( "Authorization", token ) ] (Http.expectJson User.listDecoder) (listUrl query)

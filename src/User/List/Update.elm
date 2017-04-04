@@ -3,8 +3,7 @@ module User.List.Update exposing (..)
 import User.List.Msg as Msg exposing (Msg)
 import User.List.Model as Model exposing (Model)
 import Material
-import User.List.Req as Req
-import RemoteData
+import Store.User.Update as StoreUpdate
 
 
 update : String -> Msg -> Model -> ( Model, Cmd Msg )
@@ -17,19 +16,12 @@ update token msg model =
             in
                 ( mdl, ms )
 
-        Msg.FetchList ->
-            if model.status == Model.Loading then
-                ( model, Cmd.none )
-            else
-                ( Model.loading model, Req.fetchList model.query token )
-
-        Msg.OnList dt ->
-            case dt of
-                RemoteData.Success lst ->
-                    ( Model.addUsers model lst, Cmd.none )
-
-                _ ->
-                    ( model, Cmd.none )
+        Msg.Store msg_ ->
+            let
+                ( mdl, ms ) =
+                    StoreUpdate.update token msg_ model.store
+            in
+                ( { model | store = mdl }, Cmd.map Msg.Store ms )
 
         _ ->
             ( model, Cmd.none )

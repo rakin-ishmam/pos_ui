@@ -12,7 +12,7 @@ import Debug
 
 view : Model -> Html Msg
 view model =
-    userTable model.roles
+    userTable model.store.roles
 
 
 userTable : List Role -> Html Msg

@@ -1,18 +1,15 @@
 module Role.List.Msg exposing (..)
 
 import Material
-import RemoteData exposing (WebData)
-import Data.Role as Role exposing (Role)
-import Lib.NewCmd as NewCmd
+import Store.Role.Msg as StoreMsg
 
 
 type Msg
     = None
     | Mdl (Material.Msg Msg)
-    | OnList (WebData (List Role))
-    | FetchList
+    | Store StoreMsg.Msg
 
 
 init : Cmd Msg
 init =
-    NewCmd.cmd FetchList
+    Cmd.map Store StoreMsg.init

@@ -1,4 +1,4 @@
-module User.List.Query exposing (..)
+module Store.User.Query exposing (..)
 
 import Config
 
@@ -16,8 +16,8 @@ query =
     }
 
 
-increaseSkip : Query -> Query
-increaseSkip query =
+nextChunk : Query -> Query
+nextChunk query =
     { query | skip = query.skip + Config.limit }
 
 
