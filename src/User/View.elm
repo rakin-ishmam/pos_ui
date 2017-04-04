@@ -30,9 +30,7 @@ view model =
 
 gridView : Model -> Html Msg -> Html Msg
 gridView model child =
-    Grid.grid []
-        [ Grid.cell [ Grid.size Grid.All 12 ] [ child ]
-        ]
+    Options.div [ Options.css "width" "100%" ] [ child ]
 
 
 detailView : Model -> Html Msg
