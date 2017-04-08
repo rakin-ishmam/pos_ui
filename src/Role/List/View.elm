@@ -8,11 +8,29 @@ import Data.Role as Role exposing (Role)
 import Material.Options as Options
 import String
 import Debug
+import Material.Grid as Grid
+import Material.Button as Button
+import Material.Icon as Icon
 
 
 view : Model -> Html Msg
 view model =
-    userTable model.store.roles
+    Grid.grid
+        []
+        [ Grid.cell
+            [ Grid.offset Grid.All 11, Grid.size Grid.All 1 ]
+            [ Button.render Msg.Mdl
+                [ 0 ]
+                model.mdl
+                [ Button.fab
+                , Button.colored
+                ]
+                [ Icon.i "add" ]
+            ]
+        , Grid.cell
+            [ Grid.size Grid.All 12 ]
+            [ userTable model.store.roles ]
+        ]
 
 
 userTable : List Role -> Html Msg

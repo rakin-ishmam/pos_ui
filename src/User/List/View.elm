@@ -13,7 +13,8 @@ import Material.Grid as Grid
 
 view : Model -> Html Msg
 view model =
-    Grid.grid []
+    Grid.grid
+        []
         [ Grid.cell
             [ Grid.offset Grid.All 11, Grid.size Grid.All 1 ]
             [ Button.render Msg.Mdl
@@ -33,8 +34,10 @@ view model =
 userTable : List User -> Html Msg
 userTable users =
     Table.table [ Options.css "width" "100%" ]
-        [ Table.thead []
-            [ Table.tr []
+        [ Table.thead
+            []
+            [ Table.tr
+                []
                 [ Table.th [] [ text "Name" ]
                 , Table.th [] [ text "Username" ]
                 , Table.th [] [ text "Emal" ]
@@ -47,7 +50,8 @@ userTable users =
             (users
                 |> List.map
                     (\item ->
-                        Table.tr []
+                        Table.tr
+                            []
                             [ Table.td [] [ text item.name ]
                             , Table.td [] [ text item.username ]
                             , Table.td [] [ text item.email ]

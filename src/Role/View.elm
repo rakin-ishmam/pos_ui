@@ -3,7 +3,6 @@ module Role.View exposing (..)
 import Role.Msg as Msg exposing (Msg)
 import Role.Model as Model exposing (Model)
 import Html exposing (Html, h5, div, p, text, table, tr, td, map)
-import Material.Tabs as Tabs
 import Material.Typography as Typo
 import Material.Options as Options
 import Role.Label as Label
@@ -31,9 +30,7 @@ view model =
 
 gridView : Model -> Html Msg -> Html Msg
 gridView model child =
-    Grid.grid []
-        [ Grid.cell [ Grid.size Grid.All 12 ] [ child ]
-        ]
+    Options.div [ Options.css "width" "100%" ] [ child ]
 
 
 detailView : Model -> Html Msg
