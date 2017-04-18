@@ -15,6 +15,20 @@ update token msg model =
             else
                 ( Model.loading model, Req.fetchList model.query token )
 
+        Msg.Create role ->
+            if model.status == Model.Loading then
+                ( model, Cmd.none )
+            else
+                ( Model.loading model, Req.create token role )
+
+        Msg.OnCreate dt ->
+            case dt of
+                RemoteData.Success id ->
+                    ( Model.addCreateId model id, Cmd.none )
+
+                _ ->
+                    ( model, Cmd.none )
+
         Msg.OnList dt ->
             case dt of
                 RemoteData.Success lst ->
@@ -24,4 +38,7 @@ update token msg model =
                     ( model, Cmd.none )
 
         Msg.None ->
+            ( model, Cmd.none )
+
+        _ ->
             ( model, Cmd.none )
